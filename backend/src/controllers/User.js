@@ -1,9 +1,5 @@
-const { create } = require("domain");
-const { update, delete } = require("../database/connection");
 const UserModel = require("../models/User");
-
 const crypto = require("crypto");
-const { updateById, deleteById } = require("../models/User");
 
 module.exports = {
   async create(req, res) {
