@@ -1,4 +1,4 @@
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const connection = require("../database/connection");
 
 module.exports = {
@@ -20,8 +20,11 @@ module.exports = {
     return result;
   },
   async deleteById(user_id) {
-    const user = await connection('user').where({user_id}).select("*").first();
-    console.log(user)
+    const user = await connection("user")
+      .where({ user_id })
+      .select("*")
+      .first();
+    console.log(user);
     const result = await connection("user").where({ user_id }).delete();
     return result;
   },
