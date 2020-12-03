@@ -5,9 +5,14 @@ const UserController = require('./controllers/User');
 const BookController = require('./controllers/Book');
 const WishlistController = require('./controllers/Wishlist');
 
+const UserValidator = require('./middlewares/validators/User')
+const BookValidator = require('./middlewares/validators/Book')
+const WishlistValidator = require('./middlewares/validators/Wishlist')
+
 // User
-routes.post('/users', UserController.create);
+routes.post('/users', UserValidator.create ,UserController.create);
 routes.get('/users/:user_id', UserController.getById);
+// TODO: get by email
 routes.put('/users/:user_id', UserController.updateById);
 routes.delete('/users/:user_id', UserController.deleteById);
 
