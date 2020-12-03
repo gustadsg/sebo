@@ -5,13 +5,14 @@ module.exports = {
   async create(req, res) {
     try {
       const user = req.body;
-      const salt = crypto.randomBytes(16).toString('hex');
-      const hash = crypto.pbkdf2Sync(user.password, salt, 20, 40, "sha256").toString('hex');
+      const hash = crypto
+        .pbkdf2Sync(user.password, user.email, 20, 40, "sha256")
+        .toString("hex");
       user.password = hash;
 
-      if(await UserModel.getByEmail(user.email)){
+      if (await UserModel.getByEmail(user.email)) {
         return await res.status(400).json({
-          message: 'Failed on creating user: Email already registered'
+          message: "Failed on creating user: Email already registered",
         });
       }
       const result = await UserModel.create(user);
@@ -44,6 +45,12 @@ module.exports = {
       const { user_id } = req.params;
       const user = req.body;
 
+      const salt = await crypto.randomBytes(16).toString("hex");
+      const hashedPassword = await crypto
+        .pbkdf2Sync(user.password, user.email, 20, 40, "sha256")
+        .toString("hex");
+
+      user.password = hashedPassword;
       const result = await UserModel.updateById(user_id, user);
       return res.status(200).json(result);
     } catch (err) {
