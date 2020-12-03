@@ -1,10 +1,12 @@
-const https = require("https");
+const https = require("https"); //serve pra fazer requisições para apis externas
 const BookModel = require("../models/Book");
+const googleApi = "https://www.googleapis.com/books/v1/volumes?q="
 
 module.exports = {
   async create(req, res) {
     try {
       const book = req.body;
+      // maybe use google api to get book informations (description, cover, etc)
       const result = await BookModel.create(book);
       return res.status(200).json(result);
     } catch (err) {

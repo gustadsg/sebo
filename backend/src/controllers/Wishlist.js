@@ -4,15 +4,15 @@ const WishlistModel = require("../models/Wishlist");
 module.exports = {
   async create(req, res) {
     try {
-      const wish = req.body;
-      const {user_id} = req.params;
-      wish.user_id = user_id;
+      const wish = req.body; //pega o desejo do corpo da requisição
+      const {user_id} = req.params; //pega o id do usuario pela url
+      wish.user_id = user_id; //completa o desejo com o o id do usuario
 
-      const result = await WishlistModel.create(wish);
-      return res.status(200).json(result);
+      const result = await WishlistModel.create(wish); //usa o model da wishlist para criar um desejo
+      return res.status(200).json(result); //fala que tá tudo certo pro navegador
     } catch (err) {
-      console.warn(`Failed on creating wishlist: ${err}`);
-
+      console.warn(`Failed on creating wishlist: ${err}`); //imprime o erro no terminal
+      //fala que deu erro e mostra o erro (em forma de json) para o navegador
       return res.status(500).json({
         message: "Internal server error while creating wish on wishlist",
       });

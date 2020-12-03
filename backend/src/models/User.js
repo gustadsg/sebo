@@ -15,16 +15,18 @@ module.exports = {
       .first();
     return result;
   },
+  async getByEmail(email) {
+    const result = await connection("user")
+      .where({ email })
+      .select("*")
+      .first();
+    return result;
+  },
   async updateById(user_id, user) {
     const result = await connection("user").where({ user_id }).update(user);
     return result;
   },
   async deleteById(user_id) {
-    const user = await connection("user")
-      .where({ user_id })
-      .select("*")
-      .first();
-    console.log(user);
     const result = await connection("user").where({ user_id }).delete();
     return result;
   },
