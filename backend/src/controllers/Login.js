@@ -2,6 +2,7 @@ const UserModel = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const ACCES_TOKEN_SECRET = '6a391c140785dab897b7879837aa0749709de0b89455ef7aa8f44686f0e95b7a51188d6a4ff68a42ac0cbd35006beea39f5c186ef561a406a3ca3526b74d136a'
+// i dont thik this is useful for now
 const REFRESH_TOKEN_SECRET = '13b6df28772943824e20bef5751f195ab5828541276532639f2ab99f80a0c9cfe7075b2254f294ed1d4ad4d23264436675c251264d6df1c3127ea3bc3be81326'
 
 
