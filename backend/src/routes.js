@@ -9,5 +9,11 @@ routes.get('/users/:user_id', UserController.getById);
 routes.put('/users/:user_id', UserController.updateById);
 routes.put('/users/:user_id', UserController.deleteById);
 
+// Book
+routes.post('/books', UserController.create);
+routes.get('/books/:book_id', UserController.getById);
+routes.put('/books/:book_id', UserController.updateById);
+routes.put('/books/:book_id', UserController.deleteById);
+
 
 module.exports = routes;
