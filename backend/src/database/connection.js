@@ -1,4 +1,4 @@
-const port = process.env.NODE_ENV || 'development';
+const enviroment = process.env.NODE_ENV || 'development';
 const configuration = require('../../knexfile')[enviroment];
 console.log(configuration);
 
