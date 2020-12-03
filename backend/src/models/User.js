@@ -20,6 +20,8 @@ module.exports = {
     return result;
   },
   async deleteById(user_id) {
+    const user = await connection('user').where({user_id}).select("*").first();
+    console.log(user)
     const result = await connection("user").where({ user_id }).delete();
     return result;
   },
