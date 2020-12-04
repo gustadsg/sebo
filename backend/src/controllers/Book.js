@@ -1,6 +1,6 @@
 const https = require("https"); //serve pra fazer requisições para apis externas
 const BookModel = require("../models/Book");
-const googleApi = "https://www.googleapis.com/books/v1/volumes?q="
+const googleApi = "https://www.googleapis.com/books/v1/volumes?q=";
 
 module.exports = {
   async create(req, res) {
@@ -8,7 +8,7 @@ module.exports = {
       const book = req.body;
       // maybe use google api to get book informations (description, cover, etc)
       const result = await BookModel.create(book);
-      return res.status(200).json(result);
+      return res.status(200).json({ message: "Book created successfully" });
     } catch (err) {
       console.warn(`Failed on creating book: ${err}`);
 
@@ -22,6 +22,10 @@ module.exports = {
       const { book_id } = req.params;
 
       const result = await BookModel.getById(book_id);
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting book: book not found",
+        });
       return res.status(200).json(result);
     } catch (err) {
       console.warn(`Failed on getting book: ${err}`);
@@ -37,7 +41,11 @@ module.exports = {
       const book = req.body;
 
       const result = await BookModel.updateById(book_id, book);
-      return res.status(200).json(result);
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting book: book not found",
+        });
+      return res.status(200).json({ message: "Book updated successfully" });
     } catch (err) {
       console.warn(`Failed on updating book: ${err}`);
 
@@ -51,7 +59,11 @@ module.exports = {
       const { book_id } = req.params;
 
       const result = await BookModel.deleteById(book_id);
-      return res.status(200).json(result);
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting book: book not found",
+        });
+      return res.status(200).json({ message: "Book deleted successfully" });
     } catch (err) {
       console.warn(`Failed on deleting book: ${err}`);
 

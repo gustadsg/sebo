@@ -1,43 +1,47 @@
-const UserModel = require('../models/User');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto')
-
-const ACCES_TOKEN_SECRET = '6a391c140785dab897b7879837aa0749709de0b89455ef7aa8f44686f0e95b7a51188d6a4ff68a42ac0cbd35006beea39f5c186ef561a406a3ca3526b74d136a'
-// i dont thik this is useful for now
-const REFRESH_TOKEN_SECRET = '13b6df28772943824e20bef5751f195ab5828541276532639f2ab99f80a0c9cfe7075b2254f294ed1d4ad4d23264436675c251264d6df1c3127ea3bc3be81326'
+const UserModel = require("../models/User");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 
 module.exports = {
-    async login(req, res) {
-        try {
-            const {email, password} = await req.body;
-            const user = await UserModel.getByEmail(email);
-            
-            const salt = await crypto.randomBytes(16).toString('hex');
-            const hashedPassword = await crypto.pbkdf2Sync(password, email, 20, 40, "sha256").toString('hex');
-            
-            if(!user){
-                return res.status(403).json({
-                    message: "Failed on logging in: no user with such email"
-                });
-            }
-            if(user.password != hashedPassword){
-                return res.status(403).json({
-                    message: "Failed on logging in: wrong password"
-                });
-            }
+  async login(req, res) {
+    try {
+      const { email, password } = await req.body;
+      const user = await UserModel.getByEmail(email);
 
-            //if we are here, user must be validated (or shit happened)
-            const accessToken = jwt.sign(user, ACCES_TOKEN_SECRET, {expiresIn: 60*60*24});
+      // salt is the user email
+      const hashedPassword = await crypto
+        .pbkdf2Sync(password, email, 20, 40, "sha256")
+        .toString("hex");
 
-            return res.status(200).json({
-                accessToken: accessToken,
-                userId: user.user_id,
-                userAdmin: user.admin
-            });
+      if (!user) {
+        return res.status(403).json({
+          message: "Failed on logging in: no user with such email",
+        });
+      }
+      if (user.password != hashedPassword) {
+        return res.status(403).json({
+          message: "Failed on logging in: wrong password",
+        });
+      }
 
-        } catch (err) {
-            
-        }
+      //if we are here, user must be validated (or shit happened)
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: 60 * 60 * 24,
+      });
+
+      delete user.password;
+
+      return res.status(200).json({
+        accessToken: accessToken,
+        userId: user.user_id,
+        userAdmin: user.admin,
+      });
+    } catch (err) {
+      console.warn(`Failed on logging in: ${err}`);
+      return res.status(500).json({
+        message: "Internal server error while logging in",
+      });
     }
-}
+  },
+};

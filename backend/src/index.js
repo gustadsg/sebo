@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express"); //serve para criar rotas
 const cors = require("cors"); //serve para requisições seguras e transferências de dados
 const routes = require("./routes"); //rotas do sistema

@@ -16,7 +16,7 @@ module.exports = {
         });
       }
       const result = await UserModel.create(user);
-      return res.status(200).json(result);
+      return res.status(200).json({ message: "User created successfully" });
     } catch (err) {
       console.warn(`Failed on creating user: ${err}`);
       return res.status(500).json({
@@ -29,6 +29,12 @@ module.exports = {
       const { user_id } = req.params;
 
       const result = await UserModel.getById(user_id);
+
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting user: user not found",
+        });
+
       // dados sensiveis não devem ser retornados
       delete result.password;
 
@@ -42,8 +48,11 @@ module.exports = {
   },
   async updateById(req, res) {
     try {
-      const { user_id } = req.params;
       const user = req.body;
+      const { user_id } = req.params;
+      const looged_user_id = req.headers.user_id
+
+      if(user_id != looged_user_id) return res.status(403).json({message: "Failed on updating user: you cant update another's user information"})
 
       const salt = await crypto.randomBytes(16).toString("hex");
       const hashedPassword = await crypto
@@ -52,7 +61,13 @@ module.exports = {
 
       user.password = hashedPassword;
       const result = await UserModel.updateById(user_id, user);
-      return res.status(200).json(result);
+
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting user: user not found",
+        });
+
+      return res.status(200).json({ message: "User updated successfully" });
     } catch (err) {
       console.warn(`Failed on updating user: ${err}`);
       return res.status(500).json({
@@ -65,7 +80,13 @@ module.exports = {
       const { user_id } = req.params;
 
       const result = await UserModel.deleteById(user_id);
-      return res.status(200).json(result);
+
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting user: user not found",
+        });
+
+      return res.status(200).json({ message: "User deleted successfully" });
     } catch (err) {
       console.warn(`Failed on deleting user: ${err}`);
       return res.status(500).json({
