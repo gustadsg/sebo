@@ -49,10 +49,10 @@ module.exports = {
   async updateById(req, res) {
     try {
       const user = req.body;
-      const { user_id } = req.params;
+      const { user_id, admin } = req.params;
       const looged_user_id = req.headers.user_id
 
-      if(user_id != looged_user_id) return res.status(403).json({message: "Failed on updating user: you cant update another's user information"})
+      if(user_id != looged_user_id && admin!=1) return res.status(403).json({message: "Failed on updating user: you cant update another's user information"})
 
       const salt = await crypto.randomBytes(16).toString("hex");
       const hashedPassword = await crypto
