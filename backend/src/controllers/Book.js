@@ -7,7 +7,9 @@ module.exports = {
     try {
       const book = req.body;
       // using google api to get book informations (description, cover, etc)
-      https.get(googleApi + book.title, (response) => {
+      const formattedTitle = book.title.replace(/[^\w\s]/gi, '');
+      console.log(formattedTitle);
+      https.get(googleApi + formattedTitle, (response) => {
         let body = "";
 
         response.on("data", (chunk) => {
