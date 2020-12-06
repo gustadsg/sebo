@@ -6,7 +6,7 @@ module.exports = {
     try {
       const user = req.body;
       const hash = crypto
-        .pbkdf2Sync(user.password, user.email, 20, 40, "sha256")
+        .pbkdf2Sync(user.password, process.env.SALT, 20, 40, "sha256")
         .toString("hex");
       user.password = hash;
 

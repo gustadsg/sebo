@@ -11,7 +11,7 @@ module.exports = {
 
       // salt is the user email
       const hashedPassword = await crypto
-        .pbkdf2Sync(password, email, 20, 40, "sha256")
+        .pbkdf2Sync(password, process.env.SALT, 20, 40, "sha256")
         .toString("hex");
 
       if (!user) {
