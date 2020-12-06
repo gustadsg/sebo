@@ -6,7 +6,7 @@ module.exports = {
     try {
       const user = req.body;
       const hash = crypto
-        .pbkdf2Sync(user.password, user.email, 20, 40, "sha256")
+        .pbkdf2Sync(user.password, process.env.SALT, 20, 40, "sha256")
         .toString("hex");
       user.password = hash;
 
@@ -49,10 +49,10 @@ module.exports = {
   async updateById(req, res) {
     try {
       const user = req.body;
-      const { user_id } = req.params;
+      const { user_id, admin } = req.params;
       const looged_user_id = req.headers.user_id
 
-      if(user_id != looged_user_id) return res.status(403).json({message: "Failed on updating user: you cant update another's user information"})
+      if(user_id != looged_user_id && admin!=1) return res.status(403).json({message: "Failed on updating user: you can not update another's user information unless you are an admin"});
 
       const salt = await crypto.randomBytes(16).toString("hex");
       const hashedPassword = await crypto
@@ -78,6 +78,8 @@ module.exports = {
   async deleteById(req, res) {
     try {
       const { user_id } = req.params;
+
+      if(user_id != looged_user_id && admin!=1) return res.status(403).json({message: "Failed on deleting user: you can not delete another's user account unless you are an admin"});
 
       const result = await UserModel.deleteById(user_id);
 
