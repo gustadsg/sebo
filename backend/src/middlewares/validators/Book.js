@@ -4,7 +4,8 @@ module.exports = {
   create: celebrate({
     [Segments.BODY]: Joi.object().keys({
       title: Joi.string().min(3).required(),
-      description: Joi.string().required(),
+      image_path: Joi.string(),
+      description: Joi.string(),
       author: Joi.string().default("unknown"),
       quantity: Joi.number().integer(),
     }).unknown(),
