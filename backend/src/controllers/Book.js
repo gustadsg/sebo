@@ -6,9 +6,50 @@ module.exports = {
   async create(req, res) {
     try {
       const book = req.body;
-      // maybe use google api to get book informations (description, cover, etc)
-      const result = await BookModel.create(book);
-      return res.status(200).json({ message: "Book created successfully" });
+      // using google api to get book informations (description, cover, etc)
+      https.get(googleApi + book.title, (response) => {
+        let body = "";
+
+        response.on("data", (chunk) => {
+          body += chunk;
+        });
+
+        try {
+          response.on("end", async () => {
+            body = JSON.parse(body);
+            let google_image_path = "";
+            let google_description = "";
+            let google_author = "";
+            let i = 0;
+            while (!google_image_path || !google_description) {
+              google_image_path =
+                body.items[i].volumeInfo.imageLinks &&
+                body.items[i].volumeInfo.imageLinks.thumbnail;
+              google_description =
+                body.items[i].volumeInfo &&
+                body.items[i].volumeInfo.description;
+              google_author =
+                body.items[i].volumeInfo &&
+                body.items[i].volumeInfo.authors[0];
+              i++;
+            }
+            // if user didn't send, we'll get from google api
+            book.image_path = book.image_path
+              ? book.image_path
+              : google_image_path;
+            book.description = book.description
+              ? book.description
+              : google_description;
+            book.author =
+              book.author == "unknown" ? google_author : book.author;
+            BookModel.create(book);
+            return res.status(200).json({ message: "Book created successfully" });
+          });
+        } catch (err) {
+          console.warn(err);
+          // return res.status(500).json({ message: "Internal server error while creating book" });
+        }
+      });
     } catch (err) {
       console.warn(`Failed on creating book: ${err}`);
 
