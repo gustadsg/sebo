@@ -8,18 +8,59 @@ module.exports = {
   async getById(wish_id) {
     const result = await connection("wishlist")
       .where({ wish_id })
-      .select("*")
+      .innerJoin("book", "book.book_id", "wishlist.book_id")
+      .innerJoin("user", "user.user_id", "wishlist.user_id")
+      .select(
+        "wish_id",
+        "book.book_id",
+        "book.title",
+        "book.author",
+        "book.image_path",
+        "book.description",
+        "user.name as user_name",
+        "user.user_id"
+      )
       .first();
     return result;
   },
   // list of wishes of a user
   async getByUserId(user_id) {
-    const result = await connection("wishlist").where({ user_id }).select("*");
+    const filter = { "user.user_id": user_id };
+
+    const result = await connection("wishlist")
+      .where(filter)
+      .innerJoin("book", "book.book_id", "wishlist.book_id")
+      .innerJoin("user", "user.user_id", "wishlist.user_id")
+      .select(
+        "wish_id",
+        "book.book_id",
+        "book.title",
+        "book.author",
+        "book.image_path",
+        "book.description",
+        "user.name as user_name",
+        "user.user_id"
+      );
     return result;
   },
   // list of users who wish a book
   async getByBookId(book_id) {
-    const result = await connection("wishlist").where({ book_id }).select("*");
+    const filter = { "book.book_id": book_id };
+
+    const result = await connection("wishlist")
+      .where(filter)
+      .innerJoin("book", "book.book_id", "wishlist.book_id")
+      .innerJoin("user", "user.user_id", "wishlist.user_id")
+      .select(
+        "wish_id",
+        "book.book_id",
+        "book.title",
+        "book.author",
+        "book.image_path",
+        "book.description",
+        "user.name as user_name",
+        "user.user_id"
+      );
     return result;
   },
   /* Two reasons to comment:
