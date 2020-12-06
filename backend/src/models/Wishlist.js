@@ -63,13 +63,25 @@ module.exports = {
       );
     return result;
   },
-  /* Two reasons to comment:
-  1.doesn't make much sense to update a wish;
-  2. its not working properly */
-  // async updateById(wish_id, wish) {
-  //   const result = await connection("wishlist").where({ wish_id }).update(wish);
-  //   return result;
-  // },
+  async getByUserAndBookId(user_id, book_id){
+    const filter = { "wishlist.book_id": book_id,  "wishlist.user_id": user_id};
+
+    const result = await connection("wishlist")
+      .where(filter)
+      .innerJoin("book", "book.book_id", "wishlist.book_id")
+      .innerJoin("user", "user.user_id", "wishlist.user_id")
+      .select(
+        "wish_id",
+        "book.book_id",
+        "book.title",
+        "book.author",
+        "book.image_path",
+        "book.description",
+        "user.name as user_name",
+        "user.user_id"
+      );
+    return result;
+  },
   async deleteById(wish_id) {
     const result = await connection("wishlist").where({ wish_id }).delete();
     return result;
