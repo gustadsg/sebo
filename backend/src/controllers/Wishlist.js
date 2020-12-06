@@ -8,6 +8,16 @@ module.exports = {
       const { user_id } = req.params; //pega o id do usuario pela url
       wish.user_id = user_id; //completa o desejo com o o id do usuario
 
+      const wishAlreadyExists = await WishlistModel.getByUserAndBookId(
+        user_id,
+        wish.book_id
+      );
+
+      if (wishAlreadyExists)
+        return res
+          .status(400)
+          .json({ message: "Failed creating wish: wish already exists" });
+
       const result = await WishlistModel.create(wish); //usa o model da wishlist para criar um desejo
       return res.status(200).json({ message: "Wish created successfully" }); //fala que tá tudo certo pro navegador
     } catch (err) {
@@ -72,23 +82,6 @@ module.exports = {
       });
     }
   },
-  //   reasons for this to be commented on models/wishlist
-  //   async updateById(req, res) {
-  //     try {
-  //       const { wish_id } = req.params;
-  //       const wish = req.body;
-  //       wish.user_id = 'nada';
-
-  //       const result = await WishlistModel.updateById(wish_id, wish);
-  //       return res.status(200).json(result);
-  //     } catch (err) {
-  //       console.warn(`Failed on updating wishlist: ${err}`);
-
-  //       return res.status(500).json({
-  //         message: "Internal server error while updating wishlist",
-  //       });
-  //     }
-  //   },
 
   async deleteById(req, res) {
     try {

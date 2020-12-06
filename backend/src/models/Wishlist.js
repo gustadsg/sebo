@@ -64,7 +64,7 @@ module.exports = {
     return result;
   },
   async getByUserAndBookId(user_id, book_id){
-    const filter = { "wishlist.book_id": book_id,  "wishlist.user_id": user_id};
+    const filter = { "book.book_id": book_id,  "user.user_id": user_id};
 
     const result = await connection("wishlist")
       .where(filter)
@@ -79,7 +79,7 @@ module.exports = {
         "book.description",
         "user.name as user_name",
         "user.user_id"
-      );
+      ).first();
     return result;
   },
   async deleteById(wish_id) {

@@ -17,6 +17,7 @@ module.exports = {
             const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     
             req.headers.user_id = decoded.user_id;
+            req.headers.admin = decoded.admin;
             next();
             
           } catch (err) {
