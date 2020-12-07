@@ -1,21 +1,24 @@
-import React, {useState} from 'react' 
+import React, {useState, useContext}  from 'react' 
 import {Form, FormGroup} from 'react-bootstrap' 
 import { useHistory } from 'react-router-dom' 
 import Button from 'react-bootstrap/Button' 
+import backend from '../../services/backend'
 import "./Login.css"; 
 require("typeface-quicksand") 
  
 function Login(){ 
     const [email,setEmail] = useState(); 
     const [password,setPassword] = useState(); 
-    const history = useHistory(); 
+    const history = useHistory();
+    // const context = useContext() 
      
-    function login(){ 
-        if(email === 'admin@haikai.com'){
-            history.push("adicionarexemplar") 
-        }else{
-            alert("Bem vindo \n" + email) 
-            history.push("Home") 
+    async function login(){ 
+        try {
+            const response = await backend.post('login',{
+                email, password
+            }).then(res=>console.log(res.data));
+        } catch (err) {
+            alert('email ou senha incorreto(s)');
         }
     }
     function cadastre(){
@@ -47,17 +50,9 @@ function Login(){
                                       onChange = {(e) => setPassword(e.target.value) } /> 
                                 </Form.Group> 
             
-                                <Form.Group controlId="formBasicCheckbox"> 
-                                    <Form.Check type="checkbox" label="Check me out" /> 
-                                </Form.Group> 
-            
                                 <FormGroup> 
                                     <Button  className="button" variant="danger" onClick={login}>Login</Button>
-                                </FormGroup> 
-                                
-                              
-                               
-                               
+                                </FormGroup>                                
                             </Form> 
                             <div className="perg">
                                  <Form.Label>Não possui Login?</Form.Label>
