@@ -1,0 +1,16 @@
+.upload{
+    text-decoration: underline;
+}
+.img{
+    width: 10vw;
+    height: 30vh;
+}
+.Label{
+    background-color: red;
+}
+@media only screen and (width < 800px){
+    .img {
+        width: 40vw;
+        height: 38vh;
+        }
+}

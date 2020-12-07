@@ -1,0 +1,179 @@
+*{
+    max-width: 100vw;
+}
+
+.Home .section-2{
+    background-image: url(/images/section-2.png);
+    background-size: 100%;
+    background-position-x: 100%; 
+    background-position-y: -80%; 
+    background-repeat: no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height:100vh;
+}
+
+.Home .TitleS2{
+    padding-top: 2%;
+    font-family: 'Quicksand';
+    font-weight: 400;
+}
+
+.Home .imagem_background{
+    width: 100%;
+    height: 45vw;
+    background-position: center;
+    background-size: cover;
+}
+
+.Home .LivrosS2{
+    display: flex;
+    flex-direction: row;
+    max-width: 30vw;
+}
+
+.Home .LivroWS2{
+    padding-top: 10vh;
+    width: 20vw;
+    height: 10vh;
+}
+
+.Home .section-3{
+    background-image: url("/images/livros/hai-kai.jpg");
+    background-repeat: no-repeat;
+    background-size: 15%;
+    background-position: 70vw 12vh; 
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #733840;
+    padding-bottom: 5%;
+}
+.Home .TitleS3{
+    font-family: 'QuickSand';
+    font-weight: 400;
+    font-size: 4vw;
+    color:white;
+    padding-left: 5vw;
+    padding-top: 5vh;
+}
+
+.Home .TextoLivroS3{
+    font-family: 'Quicksand';
+    font-size: 1.8vw;
+    color: white;
+    padding-right: 10vw;
+    margin-left: 5vw;
+    max-width: 60vw;
+
+}
+.Home .imagem_book{
+    padding-top: 10vw;
+    height: 70vh;
+    padding-left: 70%;   
+}
+
+.Home .section-4{
+    background-image: url(/images/nossa-historia.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: 55vw 10vh; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: right;
+    margin-bottom: 5%;
+}
+
+.Home .imagem_history{
+    padding-top: 5%;
+    height: 100vh;
+    padding-left: 50%;   
+}
+
+.Home .TitleS4{
+    font-family: 'Quicksand';
+    font-size: 4vw;
+    padding-left: 5vw;
+    text-align: center;
+}
+
+.Home .TextoHistoriaS4{
+    max-width: 50vw;
+    padding-left: 5vw;
+    font-size: 1.8vw;
+}
+
+.Home .section-5{
+    background-image: url("/images/doe-um-exemplar.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position: 5vw 17vh; 
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #733840;
+    padding-bottom: 5%;
+    padding-top: 3%;
+}
+
+.Home .TitleS5{
+    font-family: 'QuickSand';
+    font-weight: 400;
+    font-size: 4vw;
+    color:white;
+    padding-left: 38vw;
+    padding-top: 5vh;
+}
+
+.Home .TextoLivroS5{
+    font-family: 'Quicksand';
+    font-size: 1.8vw;
+    color: white;
+    padding-right: 7vw;
+    margin-left: 38vw;
+    max-width: 60vw;
+
+}
+
+@media only screen and (width < 800px){
+    /*for cellpes*/
+   .Home .section-2{
+        background-image: url(/images/ramo-cerejeira-3.png);
+        background-position-x: 100%; 
+        background-position-y: -2%; 
+        background-repeat: no-repeat;
+        background-size: 50%;
+        height: 100%;
+   }
+   .Home .TitleS2{
+       font-size: 6vw;
+   }
+   .Home .section-3{
+       background-size: 28%;
+       background-position: 65vw 4vh;
+   }
+   .Home .TextoLivroS3{
+       font-weight: 600;
+       font-size: 2.3vw;
+   }
+   .Home .section-4{
+       background-size: 45%;
+       background-position: 50vw 10vh;
+   }
+   .Home .TitleS4{
+       padding-top: 2vh;
+   }
+   .Home .TextoHistoriaS4{
+       max-width: 51vw;
+       font-weight: 600;
+       font-size: 2.2vw;
+   }
+
+   .Home .section-5{
+        background-size: 28%;
+        background-position: 5vw 12vh;
+    }
+    .Home .TextoLivroS5{
+        font-weight: 600;
+        font-size: 2.3vw;
+    }
+}

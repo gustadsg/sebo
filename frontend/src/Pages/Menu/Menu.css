@@ -1,0 +1,52 @@
+.list{
+    width: 260px;
+}
+.slider-frame{
+    width: 100vw;
+    height: 10vh;
+}
+.listItemText{
+    color: #343434;
+    margin-left: 16px;
+    text-align: left;
+}
+
+.typography{
+    text-align: left;
+}
+
+.toolBar{
+    background-color: white;
+
+}
+
+.userName{
+    color: #343434;
+    margin: 0;
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
+
+.userContainer{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    padding: 0.5%;
+}
+
+.ico{
+    width: 117px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 800px){
+    .ico{
+        width: 20%;
+        height: 20%;
+    }
+}

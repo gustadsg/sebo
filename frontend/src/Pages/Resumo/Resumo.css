@@ -1,0 +1,116 @@
+.resumo{
+    margin-top: -4%;
+    background-size: 65%;
+    background-image: url(/images/arvore-cerejeira-style.png);
+    background-repeat: no-repeat;
+    background-position-x: -80%;
+    background-position-y: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.resumo .img-format{
+    width: 290px;
+    height: 417px;
+}
+
+.resumo .titulo-livro{
+    font-family: 'Quicksand';
+    font-size: 50px;
+    font-weight: 500;
+    text-align: left;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.resumo .autor-livro{
+    font-family: 'Quicksand';
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    display: flex;
+    text-align: left;
+}
+
+.descricao-livro{
+    font-family: 'Quicksand';
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+    display: flex;
+    text-align: justify;
+}
+
+.imagem-livro{
+    display: inline-block;
+    align-items: center;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+    padding-bottom: 5%;
+    width: 50%;
+}
+
+.dados{ 
+    display: flex;
+    flex-direction: column;
+    padding-top: 15%;
+    padding-left: 2.5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    width: 50%;
+    min-height: 417px;
+}
+
+.hover01 img {
+    padding-top: 25px;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.hover01 img:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.Comments{
+    padding-top: 4vh;
+}
+.Rating{
+    padding-top: 3vh;
+}
+@media (max-width: 800px){
+    .resumo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        background-image: url(/images/branco.png)
+    }
+
+    .imagem-livro{
+        display: flex;
+        flex-direction: column;
+        margin-top: -10%;
+        padding-bottom: 0%;
+    }
+
+    .resumo .img-format{
+        height: 57vh;
+        width: 40vh;
+    }
+
+    .dados{ 
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 15%;
+        padding-top: 0%;
+    }
+
+    .resumo .titulo-livro{
+        font-size: 2.5rem;
+    }
+
+}

@@ -1,0 +1,54 @@
+.livro-carousel{
+    margin-top: 5%;
+    height: 275px;
+}
+
+.livro-info{
+    font-family: 'Quicksand';
+    font-size: 20px;
+    font-weight: 400!important;
+    color: white!important;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    min-height: 120px;
+}
+
+.itens-carousel{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+}
+
+.container {
+    align-items: center;
+    display: flex;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.hover01 img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.hover01 img:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+@media (max-width: 800px){
+    .livro-info{
+        font-size: 1.1rem;
+        min-height: 60px;
+    }
+
+}
