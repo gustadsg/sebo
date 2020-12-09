@@ -1,15 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import Carrossel from "../Components/Carrossel/Carrossel";
 import Footer from "../Components/Footer/Footer";
 import GalleryLivrosHome from "../Components/GalleryLivrosHome/GalleryLivrosHome";
 import "./Home.css";
+import {UserContext} from '../../context/UserContext'
+
 require("typeface-quicksand");
 
 
-function Home(props){
- 
+function Home(){
+  const {user} = useContext(UserContext);
+  console.log('home', user)
     return (
-      
       <>
         <Carrossel/>
         <div className="Home">

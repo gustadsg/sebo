@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import "./cadastro.css"
 import { useHistory } from 'react-router-dom' 
 import {Form, FormGroup} from 'react-bootstrap' 
@@ -9,6 +9,7 @@ require('typeface-quicksand')
 function Cadastro() {
     const history = useHistory(); 
     const [nome,setNome] = useState();
+
     function Home(){ 
         alert("Bem vindo " +nome) 
         history.push("Home") 
