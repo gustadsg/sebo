@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import UserPrivate from "./routes/UserPrivate";
+import AdminPrivate from "./routes/AdminPrivate";
 
 import Cadastro from "./Pages/Cadastro";
 import Home from "./Pages/Home";
@@ -13,7 +15,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={userMenu} />
+        <Route path="/" component={UserMenu} />
       </Switch>
       <Route exact path="/">
         <Redirect to="/home" />
@@ -22,33 +24,21 @@ function Routes() {
   );
 }
 
-function userMenu() {
+function UserMenu({ setState }) {
   return (
     <Menu>
       <Switch>
         <Route path="/home" component={Home} />
-        <Route path="/home" component={() => <Redirect to="/login" />} />
 
         <Route path="/nossoslivros" component={NossosLivros} />
-        <Route
-          path="/nossoslivros"
-          component={() => <Redirect to="/login" />}
-        />
 
         <Route path="/resumo" component={Resumo} />
-        <Route path="/resumo" component={() => <Redirect to="/login" />} />
 
         <Route path="/login" component={Login} />
-        <Route path="/login" component={() => <Redirect to="/login" />} />
 
         <Route path="/cadastro" component={Cadastro} />
-        <Route path="/cadastro" component={() => <Redirect to="/login" />} />
 
-        <Route path="/adicionarexemplar" component={AdicionarExemplar} />
-        <Route
-          path="/adicionarexemplar"
-          component={() => <Redirect to="/login" />}
-        />
+        <AdminPrivate path="/adicionarexemplar" component={AdicionarExemplar} />
       </Switch>
     </Menu>
   );
