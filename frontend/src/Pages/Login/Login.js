@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import {UserContext} from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import "./Login.css";
 require("typeface-quicksand");
 
@@ -10,17 +10,11 @@ function Login(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const history = useHistory();
-  const {user, handleLogin } = useContext(UserContext);
-  
-  
+  const { user, handleLogin } = useContext(UserContext);
+
   async function login() {
-    await handleLogin(email, password)
-    if (props.location.state.redirect) {
-      return history.push(props.location.state.redirect.path)
-    }
-    else{
-      alert('logado com sucesso!')
-    }
+    await handleLogin(email, password);
+    alert("logado com sucesso!");
   }
 
   function cadastre() {
