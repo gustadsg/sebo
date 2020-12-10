@@ -19,7 +19,6 @@ function ContextProvider({ children }) {
         password,
       });
       setUser(data);
-      console.log(data.userName)
       // Save info in local storage
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userAdmin", data.userAdmin);
