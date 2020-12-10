@@ -24,10 +24,9 @@ function AppMenu(props) {
   const [currentPage, setCurrentPage] = useState("/home");
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const {handleLogout} = useContext(UserContext);
-  const displayAvatar = localStorage.accessToken ? 'block' : 'none';
-  const displayAddBook = localStorage.userAdmin==1 ? 'block' : 'none';
-
+  const { handleLogout } = useContext(UserContext);
+  const displayAvatar = localStorage.accessToken ? "block" : "none";
+  const displayAddBook = localStorage.userAdmin == 1 ? "block" : "none";
 
   function logout() {
     handleLogout();
@@ -97,7 +96,7 @@ function AppMenu(props) {
 
           <div className="userContainer">
             <Avatar
-              style={{display: displayAvatar}}
+              style={{ display: displayAvatar }}
               alt="User"
               className="avatar"
               src="/images/user.png"
@@ -113,7 +112,12 @@ function AppMenu(props) {
             onClose={toggleAvatarMenu}
             className="drop-menu"
           >
-            <MenuItem style={{display: displayAddBook}} onClick={()=> history.push('/adicionarexemplar')}>Adicionar Exemplar</MenuItem>
+            <MenuItem
+              style={{ display: displayAddBook }}
+              onClick={() => history.push("/adicionarexemplar")}
+            >
+              Adicionar Exemplar
+            </MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </Toolbar>

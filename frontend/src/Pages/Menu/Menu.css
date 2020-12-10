@@ -1,64 +1,64 @@
 /* navbar style -- Gustavo*/
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
 
-.drop-menu{
-    margin-top: 55px;
+.drop-menu {
+  margin-top: 55px;
 }
 
-.avatar{
-    cursor: pointer;
+.avatar {
+  cursor: pointer;
 }
 /* previus menu style -- other group*/
-.list{
-    width: 260px;
+.list {
+  width: 260px;
 }
-.slider-frame{
-    width: 100vw;
-    height: 10vh;
+.slider-frame {
+  width: 100vw;
+  height: 10vh;
 }
-.listItemText{
-    color: #343434;
-    margin-left: 16px;
-    text-align: left;
-}
-
-.typography{
-    text-align: left;
+.listItemText {
+  color: #343434;
+  margin-left: 16px;
+  text-align: left;
 }
 
-.toolBar{
-    background-color: white;
+.typography {
+  text-align: left;
 }
 
-.userName{
-    color: #343434;
-    margin: 0;
-    margin-right: 5px;
-    font-size: 1.1rem;
+.toolBar {
+  background-color: white;
 }
 
-.userContainer{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+.userName {
+  color: #343434;
+  margin: 0;
+  margin-right: 5px;
+  font-size: 1.1rem;
 }
 
-.logo{
-    display: flex;
-    align-items: center;
-    padding: 0.5%;
+.userContainer {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
-.ico{
-    width: 117px;
-    height: 30px;
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0.5%;
 }
 
-@media only screen and (max-width: 800px){
-    .ico{
-        width: 20%;
-        height: 20%;
-    }
+.ico {
+  width: 117px;
+  height: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+  .ico {
+    width: 20%;
+    height: 20%;
+  }
 }
