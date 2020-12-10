@@ -6,3 +6,6 @@ div#root {
     overflow-x: hidden;
 }
 
+.hidden{
+    display: none;
+}

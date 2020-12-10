@@ -9,8 +9,9 @@ export default function RoutesPrivate({ path, component }) {
   const context = useContext(UserContext);
   const sessionToken = context.user.accessToken || context.loadSession().accessToken;
   const userAdmin = context.user.userAdmin || context.loadSession().userAdmin;
+  console.log(userAdmin)
   // Authenticated
-  if ( sessionToken && userAdmin) return (<Route path={path} component={component} />);
+  if ( sessionToken && userAdmin == 1) return (<Route path={path} component={component} />);
   // Not authenticated
   else return (<Redirect to={'/login'} />)
 }

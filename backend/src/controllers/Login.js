@@ -36,6 +36,7 @@ module.exports = {
         accessToken: accessToken,
         userId: user.user_id,
         userAdmin: user.admin,
+        userName: user.name
       });
     } catch (err) {
       console.warn(`Failed on logging in: ${err}`);

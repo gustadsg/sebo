@@ -9,23 +9,33 @@ import {
   IconButton,
   Avatar,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import React, { useState, useContext, useEffect } from "react";
 import { MdHome, MdLibraryBooks, MdMenu, MdLaptop } from "react-icons/md";
+import { UserContext } from "../../context/UserContext";
 import { FaUser } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import "./Menu.css";
 import { useHistory } from "react-router-dom";
 
-function Menu(props) {
+function AppMenu(props) {
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState("/home");
   const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const {handleLogout} = useContext(UserContext);
+  const displayAvatar = localStorage.accessToken ? 'block' : 'none';
 
-  function toggleAvatarMenu() {
-    const avatarMenu = document.querySelector("#avatar-menu");
-    avatarMenu.classList.contains("hidden")
-      ? avatarMenu.classList.remove("hidden")
-      : avatarMenu.classList.add("hidden");
+
+  function logout() {
+    handleLogout();
+    toggleAvatarMenu();
+    history.push("/home");
+  }
+
+  function toggleAvatarMenu(event) {
+    anchorEl ? setAnchorEl(null) : setAnchorEl(event.currentTarget);
   }
 
   function handleClick(pathName) {
@@ -86,6 +96,7 @@ function Menu(props) {
 
           <div className="userContainer">
             <Avatar
+              style={{display: displayAvatar}}
               alt="User"
               className="avatar"
               src="/images/user.png"
@@ -93,15 +104,16 @@ function Menu(props) {
             />
           </div>
 
-          <div id="avatar-menu">
-            <ul className="drop-menu">
-              <li className="drop-menu-item">
-                <div>
-                  <button className="logout-btn">Logout</button>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={toggleAvatarMenu}
+            className="drop-menu"
+          >
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
 
@@ -132,4 +144,4 @@ function Menu(props) {
   );
 }
 
-export default Menu;
+export default AppMenu;

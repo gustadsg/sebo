@@ -4,43 +4,7 @@
 }
 
 .drop-menu{
-    position: fixed;
-    right: 0;
-    top: 65px;
-    min-height: 50px;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    border: #49474785 2px solid;
-    color: black
-}
-
-.drop-menu-item{
-    list-style: none;
-    margin: 0 auto;
-    width: 100%;
-    /* this should be discommented if more than one list item */
-    /* border-bottom: solid 2px rgba(88, 86, 86, 0.432); */
-    padding: 5px 0;
-    font-size: large;
-    font-weight: bold;
-}
-
-.logout-btn{
-    width: 100%;
-    background-color: #fff;
-    border: none;
-    color:#E9B1CD;
-    font-weight: inherit;
-}
-
-.logout-btn:hover{
-    background-color: rgba(248, 188, 223, 0.219);
+    margin-top: 55px;
 }
 
 /* previus menu style -- other group*/
