@@ -19,11 +19,10 @@ function ContextProvider({ children }) {
         password,
       });
       setUser(data);
-      console.log(data.userName)
       // Save info in local storage
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userAdmin", data.userAdmin);
-      localStorage.setItem("userAdmin", data.userName);
+      localStorage.setItem("userName", data.userName);
       alert("logado com sucesso. Bem vindo, " + data.userName);
     } catch (err) {
       alert("email ou senha incorreto(s)");

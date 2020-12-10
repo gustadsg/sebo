@@ -17,7 +17,7 @@ import { UserContext } from "../../context/UserContext";
 import { FaUser } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import "./Menu.css";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 function AppMenu(props) {
   const history = useHistory();
@@ -26,6 +26,7 @@ function AppMenu(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const {handleLogout} = useContext(UserContext);
   const displayAvatar = localStorage.accessToken ? 'block' : 'none';
+  const displayAddBook = localStorage.userAdmin==1 ? 'block' : 'none';
 
 
   function logout() {
@@ -112,6 +113,7 @@ function AppMenu(props) {
             onClose={toggleAvatarMenu}
             className="drop-menu"
           >
+            <MenuItem style={{display: displayAddBook}} onClick={()=> history.push('/adicionarexemplar')}>Adicionar Exemplar</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </Toolbar>
