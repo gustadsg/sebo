@@ -19,9 +19,12 @@ function ContextProvider({ children }) {
         password,
       });
       setUser(data);
+      console.log(data.userName)
       // Save info in local storage
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userAdmin", data.userAdmin);
+      localStorage.setItem("userAdmin", data.userName);
+      alert("logado com sucesso. Bem vindo, " + data.userName);
     } catch (err) {
       alert("email ou senha incorreto(s)");
     }
@@ -30,13 +33,20 @@ function ContextProvider({ children }) {
   function loadSession() {
     // Get info from local storage
     const accessToken = localStorage.getItem("accessToken");
-    
+
     const userAdmin = localStorage.getItem("userAdmin");
-    return {accessToken, userAdmin}
+    return { accessToken, userAdmin };
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+    setUser(defaultValues);
   }
 
   return (
-    <UserContext.Provider value={{ user, handleLogin, loadSession }}>
+    <UserContext.Provider
+      value={{ user, handleLogin, loadSession, handleLogout }}
+    >
       {children}
     </UserContext.Provider>
   );

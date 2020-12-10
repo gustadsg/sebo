@@ -1,3 +1,13 @@
+/* navbar style -- Gustavo*/
+.hidden{
+    display: none;
+}
+
+.drop-menu{
+    margin-top: 55px;
+}
+
+/* previus menu style -- other group*/
 .list{
     width: 260px;
 }
@@ -17,7 +27,6 @@
 
 .toolBar{
     background-color: white;
-
 }
 
 .userName{

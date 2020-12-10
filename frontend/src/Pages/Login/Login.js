@@ -14,7 +14,6 @@ function Login(props) {
 
   async function login() {
     await handleLogin(email, password);
-    alert("logado com sucesso!");
   }
 
   function cadastre() {
