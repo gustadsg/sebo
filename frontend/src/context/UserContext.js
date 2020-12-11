@@ -29,7 +29,12 @@ function ContextProvider({ children }) {
     }
   }
 
-  function setSession(user){
+  function setSession(user) {
+    // Save info in local storage
+    localStorage.setItem("accessToken", user.accessToken);
+    localStorage.setItem("userAdmin", user.userAdmin);
+    localStorage.setItem("userName", user.userName);
+    // Save info in context
     setUser(user);
   }
 

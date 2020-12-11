@@ -18,7 +18,13 @@ export default function RoutesPrivate({ path, component }) {
 
   async function validToken() {
     const response = await api.post("/token/verify", {}, config)
-    return response.data.validToken;
+    const data = response.data
+
+    // save user infos in context
+    delete response.data.validToken;
+    context.setSession(response.data)
+
+    return data.validToken;
   }
 
   return validToken() ? (
