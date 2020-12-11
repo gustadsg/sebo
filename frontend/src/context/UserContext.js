@@ -23,10 +23,14 @@ function ContextProvider({ children }) {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userAdmin", data.userAdmin);
       localStorage.setItem("userName", data.userName);
-      alert("logado com sucesso. Bem vindo, " + data.userName);
+      alert("logado com sucesso. Bem vindo, " + data.userName[0]);
     } catch (err) {
       alert("email ou senha incorreto(s)");
     }
+  }
+
+  function setSession(user){
+    setUser(user);
   }
 
   function loadSession() {
@@ -44,7 +48,7 @@ function ContextProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, handleLogin, loadSession, handleLogout }}
+      value={{ user, handleLogin, setSession, loadSession, handleLogout }}
     >
       {children}
     </UserContext.Provider>
