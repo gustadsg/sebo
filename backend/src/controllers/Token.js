@@ -3,12 +3,14 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   async verify(req, res) {
     try {
-      const { accessToken, admin, user_id } = req.headers;
-      return res.status(200).json({ accessToken, validToken: true, admin, user_id});
+      const { authorization, admin, userId } = req.headers;
+      return res
+        .status(200)
+        .json({ accessToken: authorization.split(" ")[1], validToken: true, userAdmin: admin, userId});
     } catch (err) {
       console.warn(err);
-      return res.status(400).json({
-        validToken: false
+      return res.status(500).json({
+        message: "Internal server error while validating token",
       });
     }
   },

@@ -18,7 +18,7 @@ const AuthAdmin = require("./middlewares/authentication/authAdmin");
 routes.post("/login", LoginController.login);
 
 // Verify Token
-routes.post('/token/verify', AuthUser.authenticateToken, TokenController.verify)
+routes.post('/token/verify', TokenController.verify)
 
 // User
 routes.post("/users", UserValidator.create, UserController.create);

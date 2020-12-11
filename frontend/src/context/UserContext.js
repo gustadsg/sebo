@@ -23,7 +23,7 @@ function ContextProvider({ children }) {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userAdmin", data.userAdmin);
       localStorage.setItem("userName", data.userName);
-      alert("logado com sucesso. Bem vindo, " + data.userName[0]);
+      alert("logado com sucesso. Bem vindo, " + data.userName.split(" ")[0]);
     } catch (err) {
       alert("email ou senha incorreto(s)");
     }
@@ -41,8 +41,8 @@ function ContextProvider({ children }) {
   function loadSession() {
     // Get info from local storage
     const accessToken = localStorage.getItem("accessToken");
-
     const userAdmin = localStorage.getItem("userAdmin");
+    const userName = localStorage.getItem("userName");
     return { accessToken, userAdmin };
   }
 

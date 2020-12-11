@@ -6,30 +6,41 @@ import { UserContext } from "../context/UserContext";
 
 export default function RoutesPrivate({ path, component }) {
   const context = useContext(UserContext);
-  const sessionToken =
-    context.user.accessToken || context.loadSession().accessToken;
-  const userAdmin = context.user.userAdmin || context.loadSession().userAdmin;
+  const sessionToken = context.loadSession().accessToken;
+  const userAdmin = context.loadSession().userAdmin;
+  const userId = context.loadSession().userId;
+
+  const [userIsAdmin, setUserIsAdmin] = useState(userAdmin)
+  const [renderComponent, setRenderComponent] = useState(<div style={{backgroundColor: 'red', height: '600px', width: '600px', padding: '30%', fontSize:'60px'}}>loading</div>);
+
+
+
 
   const config = {
     headers: {
-      authorization: 'BEARER ' + sessionToken,
+      authorization: "BEARER " + sessionToken,
+      userAdmin: userAdmin,
+      userId: userId,
     },
   };
 
-  async function validToken() {
-    const response = await api.post("/token/verify", {}, config)
-    const data = response.data
+  useEffect(() => {
+    api.post("/token/verify", {}, config).then((res) => {
+      const data = res.data;
+  
+      setUserIsAdmin(data.admin)
 
-    // save user infos in context
-    delete response.data.validToken;
-    context.setSession(response.data)
+      if (data.validToken == true && userIsAdmin==1) {
+        setRenderComponent(<Route path={path} component={component} />);
+      } else {
+        setRenderComponent(<Redirect to={"/login"} />);
+      }
+    });
+  }, [])
 
-    return data.validToken;
-  }
 
-  return validToken() ? (
-    <Route path={path} component={component} />
-  ) : (
-    <Redirect to={"/login"} />
-  );
+
+  
+
+  return renderComponent
 }
