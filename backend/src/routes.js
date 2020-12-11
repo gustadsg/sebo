@@ -5,6 +5,7 @@ const UserController = require("./controllers/User");
 const BookController = require("./controllers/Book");
 const WishlistController = require("./controllers/Wishlist");
 const LoginController = require("./controllers/Login");
+const TokenController = require("./controllers/Token");
 
 const UserValidator = require("./middlewares/validators/User");
 const BookValidator = require("./middlewares/validators/Book");
@@ -15,6 +16,9 @@ const AuthAdmin = require("./middlewares/authentication/authAdmin");
 
 // Login
 routes.post("/login", LoginController.login);
+
+// Verify Token
+routes.post('/token/verify', TokenController.verify)
 
 // User
 routes.post("/users", UserValidator.create, UserController.create);

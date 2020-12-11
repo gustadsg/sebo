@@ -18,6 +18,7 @@ module.exports = {
     
             req.headers.user_id = decoded.user_id;
             req.headers.admin = decoded.admin;
+            req.headers.accessToken = token
             next();
             
           } catch (err) {
