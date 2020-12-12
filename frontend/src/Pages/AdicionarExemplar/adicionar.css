@@ -60,70 +60,18 @@
     font-size: 3rem;
 }
 
+.label{
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1rem;
+    margin-top: 12px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
 
-.AdicionarEx .button{
-    font-family: 'Quicksand';
-    font-weight: bolder;
-    right:0;
-    bottom: 0;
+.textarea:focus #description{
+    color: blue;
 }
-.AdicionarEx textarea{
-    height: 15vw !important; 
-    resize: none; 
+form{
+    display: flex;
+    flex-direction: column;
 }
-.AdicionarEx input[type="file"]{
- display: none;
-}
-.AdicionarEx label{
-    background-color:#f8f1f4;
-    color: #0f0e0e;
-    text-align: center;
-    display: inline;
-    margin-left: 0.5vw;
-}
-@media only screen and (width < 767px){
-    /*for cellpes*/
-    .AdicionarEx textarea{
-        height: 80vw !important; 
-        resize: none; 
-    }
-    .AdicionarEx label{
-        background-color:#f8f1f4;
-        color: #0f0e0e;
-        text-align: center;
-        display: inline;
-        margin-left: 0.5vw;
-    }
-    .AdicionarEx .container{
-        align-items: center;
-        width: 100vw;
-        max-width: 100vw;
-        display:flex; 
-        justify-content: center;
-        flex-direction: column;
-        height: 180vw;
-     
-    }
-    .AdicionarEx .textbook {
-        font-family: 'Quicksand';
-        font-weight: 500;
-        font-size: small;
-        padding-left: -5%;
-        right: 0;
-        padding-right: 0;
-        margin-top: 7vh;
-        font-size: 2rem;
-    }
-    .AdicionarEx .background{
-        display:flex; 
-        align-items: center; 
-        background-image: url(/images/branco.png);
-        background-repeat: no-repeat;
-        background-size: 50vw;
-        width: 100vw;
-        justify-content: center;
-        height: 89vh;
-        flex-direction: column; 
-        background-position: -40% bottom;
-    }
-}
+
