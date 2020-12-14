@@ -25,17 +25,23 @@ export default function RoutesPrivate({ path, component }) {
   };
 
   useEffect(() => {
-    api.post("/token/verify", {}, config).then((res) => {
-      const data = res.data;
+    try {
+      api.post("/token/verify", {}, config).then((res) => {
+        const data = res.data;
+        console.log(res)
+    
+        setUserIsAdmin(data.admin)
   
-      setUserIsAdmin(data.admin)
-
-      if (data.validToken == true && userIsAdmin==1) {
-        setRenderComponent(<Route path={path} component={component} />);
-      } else {
-        setRenderComponent(<Redirect to={"/login"} />);
-      }
-    });
+        if (data.validToken == true && userIsAdmin==1) {
+          setRenderComponent(<Route path={path} component={component} />);
+        } else {
+          setRenderComponent(<Redirect to={"/login"} />);
+        }
+      });
+    } catch (error) {
+      setRenderComponent(<Redirect to={"/login"} />)
+    }
+    
   }, [])
 
 

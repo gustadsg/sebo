@@ -20,7 +20,7 @@ module.exports = {
     } catch (err) {
       console.warn(`Failed on creating user: ${err}`);
       return res.status(500).json({
-        message: "internal server error while creating user",
+        message: "Internal server error while creating user",
       });
     }
   },
