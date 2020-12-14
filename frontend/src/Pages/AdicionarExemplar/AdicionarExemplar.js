@@ -14,25 +14,25 @@ import api from "../../services/backend";
 
 require("typeface-quicksand");
 
-
-
-
-function Required(){
+function Required() {
   const style = {
-    color: 'red'
-  }
+    color: "red",
+  };
 
-  return <span style={style}>*</span>
+  return <span style={style}>*</span>;
 }
 
-
-
-
-
 function AdicionarExemplar() {
-  const initialState = {title: null, author: null, image_path: null, quantity: null, description: null, sale: null}
+  const initialState = {
+    title: null,
+    author: null,
+    image_path: null,
+    quantity: null,
+    description: null,
+    sale: null,
+  };
   const context = useContext(UserContext);
-  const sessionToken = context.loadSession().accessToken
+  const sessionToken = context.loadSession().accessToken;
   const [state, setState] = useState(initialState);
 
   function handleChange(event) {
@@ -45,20 +45,20 @@ function AdicionarExemplar() {
     e.preventDefault();
     const config = {
       headers: {
-        authorization: 'BEARER ' + sessionToken,
+        authorization: "BEARER " + sessionToken,
       },
     };
     const validState = state;
-    if(validState['author'] === null) delete validState['author']
-    if(validState['image_path'] === null) delete validState['image_path']
-    if(validState['quantity'] === null) delete validState['quantity']
-    if(validState['description'] === null) delete validState['description']
-    if(validState['sale'] === null) delete validState['sale']
-    api.post("/books", validState, config).then(res=>{
-      if (res.data['message']) alert(res.data['message']);
-      else alert('Livro adicionado com sucesso');
+    if (validState["author"] === null) delete validState["author"];
+    if (validState["image_path"] === null) delete validState["image_path"];
+    if (validState["quantity"] === null) delete validState["quantity"];
+    if (validState["description"] === null) delete validState["description"];
+    if (validState["sale"] === null) delete validState["sale"];
+    api.post("/books", validState, config).then((res) => {
+      if (res.data["message"]) alert(res.data["message"]);
+      else alert("Livro adicionado com sucesso");
       setState(initialState);
-    });  
+    });
   }
 
   return (
@@ -76,8 +76,9 @@ function AdicionarExemplar() {
                 <form>
                   <FormGroup method="POST">
                     <FormControl className="form">
-
-                      <InputLabel htmlFor="title">Título do livro <Required/></InputLabel>
+                      <InputLabel htmlFor="title">
+                        Título do livro <Required />
+                      </InputLabel>
                       <Input
                         id="my-input"
                         aria-describedby="título da obra"
@@ -122,9 +123,7 @@ function AdicionarExemplar() {
                       />
                     </FormControl>
                     <FormControl>
-                      <InputLabel htmlFor="sale">
-                        Está em promoção?
-                      </InputLabel>
+                      <InputLabel htmlFor="sale">Está em promoção?</InputLabel>
                       <Input
                         id="sale"
                         aria-describedby="quantidade de exemplares disponíveis"
