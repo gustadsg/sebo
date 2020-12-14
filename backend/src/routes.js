@@ -44,6 +44,10 @@ routes.post(
   BookController.create
 );
 routes.get(
+  "/books",
+  BookController.getAll
+);
+routes.get(
   "/books/:book_id",
   BookValidator.getById,
   BookController.getById

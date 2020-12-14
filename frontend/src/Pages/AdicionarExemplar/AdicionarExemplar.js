@@ -1,12 +1,10 @@
 import React from "react";
 import "./adicionar.css";
-import { useHistory } from "react-router-dom";
 import { useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import {
   FormControl,
   FormGroup,
-  FormLabel,
   Button,
   InputLabel,
   Input,
@@ -32,14 +30,15 @@ function Required(){
 
 
 function AdicionarExemplar() {
+  const initialState = {title: null, author: null, image_path: null, quantity: null, description: null, sale: null}
   const context = useContext(UserContext);
   const sessionToken = context.loadSession().accessToken
-  const [state, setState] = useState({title: '', author: '', image_path: '', quantity: '', description: ''});
+  const [state, setState] = useState(initialState);
 
   function handleChange(event) {
     const target = event.target;
     const value = target.value;
-    setState({ [target.name]: value });
+    setState({ ...state, [target.name]: value });
   }
 
   function handleSubmit(e) {
@@ -49,7 +48,17 @@ function AdicionarExemplar() {
         authorization: 'BEARER ' + sessionToken,
       },
     };
-    api.post("/books", {title: state.title}, config);
+    const validState = state;
+    if(validState['author'] === null) delete validState['author']
+    if(validState['image_path'] === null) delete validState['image_path']
+    if(validState['quantity'] === null) delete validState['quantity']
+    if(validState['description'] === null) delete validState['description']
+    if(validState['sale'] === null) delete validState['sale']
+    api.post("/books", validState, config).then(res=>{
+      if (res.data['message']) alert(res.data['message']);
+      else alert('Livro adicionado com sucesso');
+      setState(initialState);
+    });  
   }
 
   return (
@@ -109,6 +118,19 @@ function AdicionarExemplar() {
                         name="quantity"
                         type="number"
                         value={state.quantity}
+                        onChange={handleChange}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <InputLabel htmlFor="sale">
+                        Está em promoção?
+                      </InputLabel>
+                      <Input
+                        id="sale"
+                        aria-describedby="quantidade de exemplares disponíveis"
+                        name="sale"
+                        type="number"
+                        value={state.sale}
                         onChange={handleChange}
                       />
                     </FormControl>

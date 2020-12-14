@@ -5,6 +5,10 @@ module.exports = {
     const result = await connection("book").insert(book);
     return result;
   },
+  async getAll(){
+    const result = await connection("book")
+    return result;
+  },
   async getById(book_id) {
     const result = await connection("book")
       .where({ book_id })

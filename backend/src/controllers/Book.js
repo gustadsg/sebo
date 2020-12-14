@@ -1,4 +1,5 @@
 const https = require("https"); //serve pra fazer requisições para apis externas
+const { getAll } = require("../models/Book");
 const BookModel = require("../models/Book");
 const googleApi = "https://www.googleapis.com/books/v1/volumes?q=";
 
@@ -8,7 +9,6 @@ module.exports = {
       const book = req.body;
       // using google api to get book informations (description, cover, etc)
       const formattedTitle = book.title.replace(/[^\w\s]/gi, '');
-      console.log(formattedTitle);
       https.get(googleApi + formattedTitle, (response) => {
         let body = "";
 
@@ -57,6 +57,22 @@ module.exports = {
 
       return res.status(500).json({
         message: "Internal server error while creating book",
+      });
+    }
+  },
+  async getAll(req, res){
+    try {
+      const result = await BookModel.getAll();
+      if (!result)
+        return res.status(404).json({
+          message: "Failed on getting books: books not found",
+        });
+      return res.status(200).json(result);
+    } catch (err) {
+      console.warn(`Failed on getting books: ${err}`);
+
+      return res.status(500).json({
+        message: "Internal error while getting books",
       });
     }
   },

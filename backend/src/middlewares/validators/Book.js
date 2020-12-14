@@ -2,13 +2,15 @@ const { celebrate, Joi, Segments } = require("celebrate");
 
 module.exports = {
   create: celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      title: Joi.string().min(3).required(),
-      image_path: Joi.string(),
-      description: Joi.string(),
-      author: Joi.string().default("unknown"),
-      quantity: Joi.number().integer(),
-    }).unknown(),
+    [Segments.BODY]: Joi.object()
+      .keys({
+        title: Joi.string().required(),
+        image_path: Joi.string(),
+        description: Joi.string(),
+        author: Joi.string().default("unknown"),
+        quantity: Joi.number().integer(),
+      })
+      .unknown(),
   }),
   getById: celebrate({
     [Segments.PARAMS]: Joi.object().keys({

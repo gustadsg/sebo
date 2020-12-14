@@ -10,7 +10,6 @@ module.exports = {
 
       try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        console.log(decoded)
         return res.status(200).json({validToken: true, userId: decoded.user_id, userName: decoded.name, userAdmin: decoded.admin})
 
       } catch (error) {
