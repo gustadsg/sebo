@@ -7,7 +7,6 @@ module.exports = {
   },
   async getAll(){
     const result = await connection("book")
-    console.log(result)
     return result;
   },
   async getById(book_id) {

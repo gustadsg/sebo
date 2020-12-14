@@ -1,12 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Footer from "../Components/Footer/Footer";
 import GalleryLivros from "../Components/GalleryLivros/GalleryLivros";
 import Livros from "../Components/Livros/Livros";
+import api from '../../services/backend'
 import "./NossosLivros.css";
 
 require("typeface-quicksand");
 
 function NossosLivros(){
+    const [books, setBooks] = useState()
+    
+    useEffect(() => {
+       api.get('/books').then((res)=>{
+           setBooks(res.data)
+        })
+    }, [])
+
     return (
         <>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>

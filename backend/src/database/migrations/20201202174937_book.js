@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string("image_path");
     table.string("description").defaultTo("livro sem descrição");
     table.string("author").notNullable();
+    table.integer("sale").defaultTo(0).notNullable();
     table.integer("quantity").defaultTo(1).notNullable();
   });
 };
