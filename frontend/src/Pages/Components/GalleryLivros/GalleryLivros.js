@@ -23,28 +23,26 @@ function GalleryLivros() {
   }
 
   return (
-    <>
-      <div className="container">
-        {books.map((listItem) => {
-          if (listItem.sale === 1)
-            return (
-              <div className="itens-carousel">
-                <div class="hover01">
-                  <img
-                    className="livro-carousel"
-                    src={listItem.image_path}
-                    onClick={() => verLivro(listItem)}
-                  />
-                </div>
-                <p className="livro-info">
-                  {listItem.title}
-                  <br /> Autor: {listItem.author}
-                </p>
+    <div className="container">
+      {books.map((listItem) => {
+        if (listItem.sale === 1)
+          return (
+            <div className="itens-carousel">
+              <div class="hover01">
+                <img
+                  className="livro-carousel"
+                  src={listItem.image_path}
+                  onClick={() => verLivro(listItem)}
+                />
               </div>
-            );
-        })}
-      </div>
-    </>
+              <p className="livro-info">
+                {listItem.title}
+                <br /> Autor: {listItem.author}
+              </p>
+            </div>
+          );
+      })}
+    </div>
   );
 }
 
