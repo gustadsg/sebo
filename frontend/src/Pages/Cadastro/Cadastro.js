@@ -1,23 +1,70 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./cadastro.css";
 import { useHistory } from "react-router-dom";
-import { Form, FormGroup } from "react-bootstrap";
+import { Form, FormCheck } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import api from "../../services/backend";
+import { UserContext } from "../../context/UserContext";
 require("typeface-quicksand");
 
 function Cadastro() {
   const history = useHistory();
-  const [nome, setNome] = useState();
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  };
+  const [state, setstate] = useState(initialState);
+  const [display, setDisplay] = useState('none')
+  const { loadSession } = useContext(UserContext);
+  const [token, setToken] = useState()
 
-  function Home() {
-    alert("Bem vindo " + nome);
-    history.push("Home");
+  useEffect(() => {
+    const {userAdmin} = loadSession()
+    if (userAdmin == 1) setDisplay('block')
+    console.log(userAdmin)
+  }, []);
+
+  function handleChange(e) {
+    const oldState = state;
+    let value = e.target['checked'] ? "1" : e.target.value
+    if(value == 'on') value = "0"
+    setstate({ ...oldState, [e.target.name]: value });
   }
+
+  function passwordMatchesConfirmation() {
+    return state["password"] === state["passwordConfirmation"];
+  }
+
+  function handleSubmit() {
+    if (!state) return alert("preencha todo o formulário para criar uma conta");
+    for (const key in state) {
+      if (state[key] == null || state[key] == "")
+        return alert("preencha todo o formulário para criar uma conta");
+    }
+    if (!passwordMatchesConfirmation())
+      return alert("Senha e Confirmação são diferentes");
+
+    try {
+      const data = state;
+      delete data["passwordConfirmation"];
+      api
+        .post("/users", data)
+        .then((res) => {
+          return alert("Usuário criado com sucesso!");
+        })
+        .catch((err) => alert("Não foi possível cadastrar usuário."));
+    } catch (err) {
+      return alert("Não foi possível cadastrar usuário.");
+    }
+  }
+
   return (
     <div className="Cadastro">
       <div className="button">
-        <Button className="butao" variant="danger" onClick={Home}>
+        <Button className="butao" variant="danger" onClick={handleSubmit}>
           Cadastrar!{" "}
         </Button>
       </div>
@@ -37,13 +84,15 @@ function Cadastro() {
                 ></img>
                 <div className="dados1aux">
                   <Form className="dados1">
-                    <Form.Group controlId="nome">
+                    <Form.Group controlId="name">
                       <Form.Label>Nome</Form.Label>
                       <Form.Control
                         plaintext
+                        name="name"
                         size="sm"
+                        required
                         placeholder="Seu nome"
-                        onChange={(e) => setNome(e.target.value)}
+                        onChange={handleChange}
                       />
                     </Form.Group>
 
@@ -51,30 +100,47 @@ function Cadastro() {
                       <Form.Label>Email</Form.Label>
                       <Form.Control
                         plaintext
+                        name="email"
                         size="sm"
+                        required
+                        onChange={handleChange}
                         placeholder="name@example.com.br"
                       />
                     </Form.Group>
 
-                    <Form.Group controlId="senha">
+                    <Form.Group controlId="password">
                       <Form.Label>Senha</Form.Label>
                       <Form.Control
                         type="password"
+                        name="password"
                         plaintext
                         size="sm"
+                        required
+                        onChange={handleChange}
                         placeholder="Senha"
                       />
                     </Form.Group>
 
-                    <Form.Group controlId="senhaconf">
+                    <Form.Group controlId="passwordConfirmation">
                       <Form.Label>Confirme sua senha</Form.Label>
                       <Form.Control
                         type="password"
+                        name="passwordConfirmation"
                         plaintext
                         size="sm"
+                        required
+                        onChange={handleChange}
                         placeholder="Senha"
                       />
                     </Form.Group>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label="Admin"
+                      name='admin'
+                      style={{display: display}}
+                      onClick={handleChange}
+                    ></Form.Check>
                   </Form>
                 </div>
                 <div className="dados2aux">
