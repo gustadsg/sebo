@@ -17,7 +17,7 @@ function Home() {
           <h1 className="TitleS2">
             <span class="badge badge-danger">Novidades</span> da semana
           </h1>
-          <GalleryLivrosHome />
+          <GalleryLivrosHome/>
         </div>
 
         <div className="section-3">
