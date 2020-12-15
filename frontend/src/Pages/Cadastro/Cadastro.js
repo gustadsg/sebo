@@ -24,7 +24,6 @@ function Cadastro() {
   useEffect(() => {
     const {userAdmin} = loadSession()
     if (userAdmin == 1) setDisplay('block')
-    console.log(userAdmin)
   }, []);
 
   function handleChange(e) {
