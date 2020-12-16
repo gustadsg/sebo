@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
 import Comments from "../Components/Comments/Comments"
 import CustomizedRatings from '../Components/Rating/Rating'
@@ -12,9 +13,13 @@ function Resumo( props ){
         setData(props.location.state.livro)
       }, []);
 
+      const history = useHistory()
     return (
         <>
             <div className="resumo">
+                    <button
+                    onClick={()=>history.push(`/edit/${data.book_id}`)}
+                    >Editar Livro</button>
                     <div className="imagem-livro">
                         <div class="hover01">
                             <img className="img-format" src={data.image_path}/>
