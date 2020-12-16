@@ -32,9 +32,9 @@ function UserMenu({ setState }) {
       <Switch>
         <Route path="/home" component={Home} />
 
-        <Route path="/user/:user_id" component={UserEdit} />
+        <UserPrivate path="/user/:user_id" component={UserEdit} />
 
-        <Route path="/editBook/:book_id" component={BookEdit} />
+        <AdminPrivate path="/editBook/:book_id" component={BookEdit} />
 
         <Route path="/nossoslivros" component={NossosLivros} />
 
