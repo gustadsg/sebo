@@ -21,6 +21,7 @@ function ContextProvider({ children }) {
       setUser(data);
       // Save info in local storage
       localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("userId", data.userId);
       localStorage.setItem("userAdmin", data.userAdmin);
       localStorage.setItem("userName", data.userName);
       alert("logado com sucesso. Bem vindo, " + data.userName.split(" ")[0]);
@@ -32,6 +33,7 @@ function ContextProvider({ children }) {
   function setSession(user) {
     // Save info in local storage
     localStorage.setItem("accessToken", user.accessToken);
+    localStorage.setItem("userId", user.userId);
     localStorage.setItem("userAdmin", user.userAdmin);
     localStorage.setItem("userName", user.userName);
     // Save info in context
@@ -42,8 +44,9 @@ function ContextProvider({ children }) {
     // Get info from local storage
     const accessToken = localStorage.getItem("accessToken");
     const userAdmin = localStorage.getItem("userAdmin");
+    const userId = localStorage.getItem("userId");
     const userName = localStorage.getItem("userName");
-    return { accessToken, userAdmin };
+    return { accessToken, userAdmin, userId, userName };
   }
 
   function handleLogout() {

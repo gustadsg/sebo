@@ -8,25 +8,33 @@ import {
   Toolbar,
   IconButton,
   Avatar,
-} from "@material-ui/core";
+}
+from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import React, { useState, useContext, useEffect } from "react";
 import { MdHome, MdLibraryBooks, MdMenu, MdLaptop } from "react-icons/md";
 import { UserContext } from "../../context/UserContext";
-import { FaUser } from "react-icons/fa";
+import { FaLessThanEqual, FaUser } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import "./Menu.css";
 import { Redirect, useHistory } from "react-router-dom";
+
+
 
 function AppMenu(props) {
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState("/home");
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { handleLogout } = useContext(UserContext);
+  const { handleLogout, user, loadSession, setSession } = useContext(UserContext);
   const displayAvatar = localStorage.accessToken ? "block" : "none";
   const displayAddBook = localStorage.userAdmin == 1 ? "block" : "none";
+
+  useEffect(() => {
+    const user = loadSession()
+    setSession(user)
+  }, [])
 
   function logout() {
     handleLogout();
@@ -118,6 +126,12 @@ function AppMenu(props) {
             >
               Adicionar Exemplar
             </MenuItem>
+
+            <MenuItem onClick={() => {
+              console.log(user)
+              history.push(`/user/${user.userId}`)
+              }}>Editar Perfil</MenuItem>
+
             <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </Toolbar>
