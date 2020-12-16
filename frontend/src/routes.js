@@ -11,7 +11,7 @@ import Resumo from "./Pages/Resumo";
 import NossosLivros from "./Pages/NossosLivros";
 import AdicionarExemplar from "./Pages/AdicionarExemplar";
 import UserEdit from "./Pages/EditarUsuario/";
-
+import BookEdit from "./Pages/EditarLivro";
 
 function Routes() {
   return (
@@ -31,8 +31,10 @@ function UserMenu({ setState }) {
     <Menu>
       <Switch>
         <Route path="/home" component={Home} />
-        
-        <Route path="/user/:user_id" component={UserEdit} />
+
+        <UserPrivate path="/user/:user_id" component={UserEdit} />
+
+        <AdminPrivate path="/editBook/:book_id" component={BookEdit} />
 
         <Route path="/nossoslivros" component={NossosLivros} />
 

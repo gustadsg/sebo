@@ -28,12 +28,12 @@ function AppMenu(props) {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const { handleLogout, user, loadSession, setSession } = useContext(UserContext);
-  const displayAvatar = localStorage.accessToken ? "block" : "none";
-  const displayAddBook = localStorage.userAdmin == 1 ? "block" : "none";
+  const displayAvatar = user.accessToken ? "block" : "none";
+  const displayAddBook = user.userAdmin == 1 ? "block" : "none";
 
   useEffect(() => {
     const user = loadSession()
-    setSession(user)
+    if(user.accessToken) setSession(user)
   }, [])
 
   function logout() {
@@ -128,7 +128,6 @@ function AppMenu(props) {
             </MenuItem>
 
             <MenuItem onClick={() => {
-              console.log(user)
               history.push(`/user/${user.userId}`)
               }}>Editar Perfil</MenuItem>
 
