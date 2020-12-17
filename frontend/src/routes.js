@@ -12,6 +12,7 @@ import NossosLivros from "./Pages/NossosLivros";
 import AdicionarExemplar from "./Pages/AdicionarExemplar";
 import UserEdit from "./Pages/EditarUsuario/";
 import BookEdit from "./Pages/EditarLivro";
+import Wishlist from "./Pages/ListaDesejos";
 
 function Routes() {
   return (
@@ -26,13 +27,15 @@ function Routes() {
   );
 }
 
-function UserMenu({ setState }) {
+function UserMenu() {
   return (
     <Menu>
       <Switch>
         <Route path="/home" component={Home} />
 
         <UserPrivate path="/user/:user_id" component={UserEdit} />
+
+        <UserPrivate path="/desejos" component={Wishlist} />
 
         <AdminPrivate path="/editBook/:book_id" component={BookEdit} />
 

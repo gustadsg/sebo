@@ -128,6 +128,10 @@ function AppMenu(props) {
             </MenuItem>
 
             <MenuItem onClick={() => {
+              history.push(`/desejos`)
+              }}>Lista de desejos</MenuItem>
+
+            <MenuItem onClick={() => {
               history.push(`/user/${user.userId}`)
               }}>Editar Perfil</MenuItem>
 

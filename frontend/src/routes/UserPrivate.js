@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import api from "../services/backend";
-
+import Loading from '../Pages/Components/Loading/Loading'
 import { UserContext } from "../context/UserContext";
 
 export default function RoutesPrivate({ path, component }) {
@@ -11,7 +11,7 @@ export default function RoutesPrivate({ path, component }) {
   const userId = context.loadSession().userId;
 
   const [userIsAdmin, setUserIsAdmin] = useState(userAdmin)
-  const [renderComponent, setRenderComponent] = useState(<div style={{backgroundColor: 'red', height: '600px', width: '600px', padding: '30%', fontSize:'60px'}}>loading</div>);
+  const [renderComponent, setRenderComponent] = useState(<Loading />);
 
 
 
