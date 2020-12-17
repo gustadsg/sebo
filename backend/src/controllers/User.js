@@ -80,7 +80,7 @@ module.exports = {
     try {
       const { user_id } = req.params;
 
-      if(user_id != looged_user_id && admin!=1) return res.status(403).json({message: "Failed on deleting user: you can not delete another's user account unless you are an admin"});
+      if(user_id != user_id && admin!=1) return res.status(403).json({message: "Failed on deleting user: you can not delete another's user account unless you are an admin"});
 
       const result = await UserModel.deleteById(user_id);
 

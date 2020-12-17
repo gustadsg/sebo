@@ -1,10 +1,13 @@
 import { Checkbox } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
+import {useHistory} from 'react-router-dom'
+import {Button} from 'react-bootstrap'
 import { UserContext } from "../../context/UserContext";
 import api from "../../services/backend";
 
 export default function UserEdit(props) {
-  const { loadSession, user, setSession } = useContext(UserContext);
+  const history = useHistory();
+  const { loadSession, user, setSession, handleLogout } = useContext(UserContext);
   const [showAdmin, setShowAdmin] = useState("none");
   const [forms, setForms] = useState();
 
@@ -30,7 +33,6 @@ export default function UserEdit(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     if (!forms) return alert("preencha todo o formulário para alterar usuário");
     for (const key in forms) {
       if (forms[key] == null || forms[key] == "")
@@ -49,6 +51,13 @@ export default function UserEdit(props) {
       return alert("Não foi possível alterar usuário.");
     }
     setForms();
+  }
+
+  function handleDelete(){
+    api.delete(`/users/${user.userId}`, config).then(()=>{
+      handleLogout();
+      history.push('/home')
+    })
   }
 
   return (
@@ -72,7 +81,8 @@ export default function UserEdit(props) {
           <Checkbox onChange={handleChange} name="admin"></Checkbox>
         </label>
       </form>
-      <button onClick={handleSubmit}>Enviar</button>
+      <Button variant='warning' onClick={handleSubmit}>Enviar</Button>
+      <Button variant='danger' onClick={handleDelete}>Deletar Conta</Button>
     </div>
   );
 }
