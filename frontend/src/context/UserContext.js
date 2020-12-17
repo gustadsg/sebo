@@ -52,6 +52,7 @@ function ContextProvider({ children }) {
   function handleLogout() {
     localStorage.clear();
     setUser(defaultValues);
+
   }
 
   return (
