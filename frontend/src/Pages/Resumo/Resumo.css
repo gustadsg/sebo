@@ -80,6 +80,16 @@
 .Rating{
     padding-top: 3vh;
 }
+
+.buttons-area2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+
 @media (max-width: 800px){
     .resumo{
         display: flex;
